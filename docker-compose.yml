@@ -1,0 +1,54 @@
+version: '3.7'
+services:
+    db:
+        container_name: db
+        image: mysql
+        command: ["--default-authentication-plugin=mysql_native_password"]
+        ports:
+            - "3308:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: micro_business_district
+            MYSQL_USER: colourlife
+            MYSQL_PASSWORD: colourlife!
+        networks:
+            - db
+    redis:
+        container_name: redis
+        image: redis
+        ports:
+            - "6379:6379"
+        entrypoint: redis-server --appendonly yes
+        restart: always
+        networks:
+            - db
+    php:
+        container_name: php-fpm
+        build: ./php-fpm
+        ports:
+            - "9000:9001"
+        volumes:
+            - ../www/pmh_czy_wsq_service:/var/www/pmh_czy_wsq_service
+        depends_on: 
+            - db
+            - redis
+        networks:
+            - db
+            - php
+    nginx:
+        container_name: nginx
+        build: ./nginx
+        ports:
+            - "80:80"
+        depends_on:
+            - php
+            - db
+            - redis
+        networks:
+            - php
+        volumes:
+            - ../www/pmh_czy_wsq_service:/var/www/pmh_czy_wsq_service
+    
+networks:
+    db:
+    php:
