@@ -5,7 +5,9 @@ LABEL maintainer="Duan Le <duanvnc@gmail.com>"
 RUN apk add --update --no-cache nginx
 
 COPY nginx.conf /etc/nginx/
-COPY laravel.conf /etc/nginx/conf.d/
+COPY wsq-czytest.savour.local.conf /etc/nginx/conf.d/
+COPY user.czytest.savour.local.conf  /etc/nginx/conf.d/
+COPY colourhome-czytest.savour.local.conf  /etc/nginx/conf.d/
 
 RUN echo "upstream php-upstream { server php:9001; }" > /etc/nginx/conf.d/upstream.conf
 
