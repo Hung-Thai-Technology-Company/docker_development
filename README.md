@@ -4,12 +4,12 @@ This is a complete stack for running Laravel into Docker containers using docker
 
 # Installation
 
-Next, add `wsq.savour.local` in your `/etc/hosts` file.
+Next, add `user.czytest.savour.local` in your `/etc/hosts` file.
 
 Make sure you adjust `databases info` in `env` to the database container alias "db" for mysql and "redis" for redis connection
 
 ```bash
-APP_URL=http://wsq.savour.local
+APP_URL=http://user.czytest.savour.local
 
 DB_CONNECTION=mysql
 DB_READ_HOST=db
@@ -45,7 +45,7 @@ $ docker-compose build
 
 Here are the `docker-compose` built images:
 
-* `db`: This is the MySQL database container (can be changed to postgresql or whatever in `docker-compose.yml` file),
+* `db`, `redis`: This is the MySQL & Redis databases container (can be changed to postgresql or whatever in `docker-compose.yml` file),
 * `php`: This is the PHP-FPM container including the application volume mounted on,
 * `nginx`: This is the Nginx webserver container in which php volumes are mounted too
 
@@ -53,18 +53,19 @@ This results in the following running containers:
 
 ```bash
 > $ docker-compose ps
- Name                Command               State                 Ports
-------------------------------------------------------------------------------------
-db        docker-entrypoint.sh --def ...   Up      0.0.0.0:3308->3306/tcp, 33060/tcp
-nginx     nginx                            Up      443/tcp, 0.0.0.0:80->80/tcp
-php-fpm   php-fpm7 -F                      Up      0.0.0.0:9000->9001/tcp
+ Name                Command              State              Ports
+------------------------------------------------------------------------------
+db        docker-entrypoint.sh --def      Up      0.0.0.0:3308->3306/tcp, 33060/tcp
+nginx     nginx                           Up      443/tcp, 0.0.0.0:80->80/tcp
+php-fpm   php-fpm7 -F                     Up      0.0.0.0:9000->9001/tcp
+redis     redis-server --appendonly yes   Up      0.0.0.0:6379->6379/tcp
 ```
 
 # Backend API Platform:
 
 ## Install: 
 ```bash
-> $ cd www/api
+> $ cd www/pmh_czy_wsq_service
 # rename file .env.dist to .env
 
 > $ docker exec -it php-fpm sh
@@ -81,7 +82,7 @@ php-fpm   php-fpm7 -F                      Up      0.0.0.0:9000->9001/tcp
 ```
 
 ## API URI: 
-`http://wsq.savour.local/api`
+`http://user.czytest.savour.local/api`
 
 ## Swagger API Docs:
-`http://wsq.savour.local/explorer/index.html`
+`http://user.czytest.savour.local.local/explorer/index.html`
