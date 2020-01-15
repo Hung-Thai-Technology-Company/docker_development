@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM php:7.1-fpm-alpine
 
 LABEL maintainer="Duan Le <duanvnc@gmail.com>"
 
