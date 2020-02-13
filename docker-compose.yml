@@ -31,6 +31,7 @@ services:
             - ../www/pmh_czy_wsq_service:/var/www/pmh_czy_wsq_service
             - ../www/pmh_user_service:/var/www/pmh_user_service
             - ../www/pmh_home_service:/var/www/pmh_home_service
+            - ../www/pmh_business_platform:/var/www/pmh_business_platform
         depends_on: 
             - db
             - redis
@@ -48,10 +49,6 @@ services:
             - redis
         networks:
             - php
-        volumes:
-            - ../www/pmh_czy_wsq_service:/var/www/pmh_czy_wsq_service
-            - ../www/pmh_user_service:/var/www/pmh_user_service
-            - ../www/pmh_home_service:/var/www/pmh_home_service
     
 networks:
     db:
