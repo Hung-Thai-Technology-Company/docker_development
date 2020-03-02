@@ -32,6 +32,7 @@ services:
             - ../www/pmh_user_service:/var/www/pmh_user_service
             - ../www/pmh_home_service:/var/www/pmh_home_service
             - ../www/pmh_business_platform:/var/www/pmh_business_platform
+            - ../www/pmh_czy_oauth2_service:/var/www/pmh_czy_oauth2_service
         depends_on: 
             - db
             - redis

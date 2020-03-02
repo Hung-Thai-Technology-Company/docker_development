@@ -9,6 +9,7 @@ COPY wsq-czytest.savour.local.conf /etc/nginx/conf.d/
 COPY user.czytest.savour.local.conf  /etc/nginx/conf.d/
 COPY colourhome-czytest.savour.local.conf  /etc/nginx/conf.d/
 COPY business-czytest.savour.local.conf  /etc/nginx/conf.d/
+COPY oauth2-czytest.savour.local.conf  /etc/nginx/conf.d/
 
 RUN echo "upstream php-upstream { server php:9001; }" > /etc/nginx/conf.d/upstream.conf
 
